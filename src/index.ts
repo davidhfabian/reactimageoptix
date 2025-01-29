@@ -84,11 +84,13 @@ async function optimizeImage(
     console.log(
       chalk.gray('  Original:'), formatBytes(originalSize),
       chalk.gray('→'), 
-      chalk.green(formatBytes(optimizedSize))
+      optimizedSize > originalSize ? chalk.red(formatBytes(optimizedSize)) : chalk.green(formatBytes(optimizedSize))
     );
     console.log(
       chalk.gray('  Reducción:'),
-      reduction > 50 ? chalk.green(`${reduction}%`) : chalk.yellow(`${reduction}%`),
+      reduction < 0 ? chalk.red(`${reduction}%`) :
+      reduction > 50 ? chalk.green(`${reduction}%`) : 
+      chalk.yellow(`${reduction}%`),
       '\n'
     );
 
